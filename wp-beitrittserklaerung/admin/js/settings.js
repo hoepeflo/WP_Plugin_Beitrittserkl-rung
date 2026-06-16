@@ -31,4 +31,23 @@
 		$('#pdf_logo_id').val('');
 		$('#bse-logo-preview').empty();
 	});
+
+	function syncRequiredState($row) {
+		var $visible = $row.find('.bse-field-visible');
+		var $required = $row.find('.bse-field-required');
+
+		if (!$visible.is(':checked')) {
+			$required.prop('checked', false).prop('disabled', true);
+		} else {
+			$required.prop('disabled', false);
+		}
+	}
+
+	$('table.widefat.striped tbody tr').each(function () {
+		syncRequiredState($(this));
+	});
+
+	$(document).on('change', '.bse-field-visible', function () {
+		syncRequiredState($(this).closest('tr'));
+	});
 })(jQuery);

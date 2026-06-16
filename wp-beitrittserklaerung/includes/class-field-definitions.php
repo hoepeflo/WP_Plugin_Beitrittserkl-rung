@@ -68,7 +68,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'Vorname', 'beitrittserklaerung' ),
 				'type'     => 'text',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 20,
 			),
 			'name'               => array(
@@ -76,7 +76,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'Name', 'beitrittserklaerung' ),
 				'type'     => 'text',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 30,
 			),
 			'geburtsdatum'       => array(
@@ -84,7 +84,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'Geburtsdatum', 'beitrittserklaerung' ),
 				'type'     => 'date',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 40,
 			),
 			'geburtsort'         => array(
@@ -92,7 +92,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'Geburtsort', 'beitrittserklaerung' ),
 				'type'     => 'text',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 50,
 			),
 			'geschlecht'         => array(
@@ -106,7 +106,7 @@ class BSE_Field_Definitions {
 					'keine_angabe'  => __( 'Keine Angabe', 'beitrittserklaerung' ),
 				),
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 60,
 			),
 			'strasse'            => array(
@@ -114,7 +114,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'Straße und Hausnummer', 'beitrittserklaerung' ),
 				'type'     => 'text',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 10,
 			),
 			'plz'                => array(
@@ -122,7 +122,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'PLZ', 'beitrittserklaerung' ),
 				'type'     => 'text',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 20,
 			),
 			'ort'                => array(
@@ -130,7 +130,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'Ort', 'beitrittserklaerung' ),
 				'type'     => 'text',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 30,
 			),
 			'land'               => array(
@@ -138,7 +138,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'Land', 'beitrittserklaerung' ),
 				'type'     => 'text',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'default'  => __( 'Deutschland', 'beitrittserklaerung' ),
 				'order'    => 40,
 			),
@@ -147,7 +147,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'E-Mail-Adresse', 'beitrittserklaerung' ),
 				'type'     => 'email',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 10,
 			),
 			'mobiltelefon'       => array(
@@ -171,7 +171,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'Gewünschtes Eintrittsdatum', 'beitrittserklaerung' ),
 				'type'     => 'date',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 10,
 			),
 			'kontoinhaber'       => array(
@@ -179,7 +179,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'Kontoinhaber', 'beitrittserklaerung' ),
 				'type'     => 'text',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 10,
 			),
 			'iban'               => array(
@@ -187,7 +187,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'IBAN', 'beitrittserklaerung' ),
 				'type'     => 'text',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 20,
 			),
 			'bic'                => array(
@@ -203,7 +203,7 @@ class BSE_Field_Definitions {
 				'label'    => __( 'Kreditinstitut', 'beitrittserklaerung' ),
 				'type'     => 'text',
 				'visible'  => true,
-				'required' => true,
+				'required' => false,
 				'order'    => 40,
 			),
 			'sepa_mandat'        => array(
@@ -236,9 +236,20 @@ class BSE_Field_Definitions {
 		$stored   = $settings['fields'] ?? array();
 
 		foreach ( $defaults as $key => $field ) {
-			if ( isset( $stored[ $key ] ) ) {
-				$defaults[ $key ] = array_merge( $field, $stored[ $key ] );
+			if ( ! isset( $stored[ $key ] ) || ! is_array( $stored[ $key ] ) ) {
+				continue;
 			}
+
+			$field['visible']  = ! empty( $stored[ $key ]['visible'] );
+			$field['required'] = ! empty( $stored[ $key ]['required'] );
+			$field['label']    = (string) ( $stored[ $key ]['label'] ?? $field['label'] );
+			$field['order']    = (int) ( $stored[ $key ]['order'] ?? $field['order'] );
+
+			if ( ! $field['visible'] ) {
+				$field['required'] = false;
+			}
+
+			$defaults[ $key ] = $field;
 		}
 
 		return $defaults;

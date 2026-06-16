@@ -162,6 +162,8 @@ class BSE_Form_Renderer {
 					<?php echo esc_html( $label ); ?>
 					<?php if ( $required ) : ?>
 						<span class="bse-required" aria-hidden="true">*</span>
+					<?php else : ?>
+						<span class="bse-optional"><?php esc_html_e( '(optional)', 'beitrittserklaerung' ); ?></span>
 					<?php endif; ?>
 				</label>
 

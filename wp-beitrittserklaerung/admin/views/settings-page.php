@@ -138,7 +138,9 @@ settings_errors( 'bse_settings' );
 		</table>
 
 		<h2 class="title"><?php esc_html_e( 'Formularfelder', 'beitrittserklaerung' ); ?></h2>
-		<p class="description"><?php esc_html_e( 'Felder können ausgeblendet und als Pflichtfeld markiert werden.', 'beitrittserklaerung' ); ?></p>
+		<p class="description">
+			<?php esc_html_e( 'Alle Felder sind standardmäßig optional. Aktivieren Sie „Pflicht“ nur für die Felder, die zwingend ausgefüllt werden müssen. Ausgeblendete Felder können nicht Pflichtfeld sein.', 'beitrittserklaerung' ); ?>
+		</p>
 
 		<?php foreach ( $clusters as $cluster_key => $cluster ) : ?>
 			<h3><?php echo esc_html( $cluster['label'] ); ?></h3>
@@ -170,6 +172,7 @@ settings_errors( 'bse_settings' );
 							<td>
 								<input
 									type="checkbox"
+									class="bse-field-visible"
 									name="fields[<?php echo esc_attr( $field_key ); ?>][visible]"
 									value="1"
 									<?php checked( ! empty( $field['visible'] ) ); ?>
@@ -178,9 +181,11 @@ settings_errors( 'bse_settings' );
 							<td>
 								<input
 									type="checkbox"
+									class="bse-field-required"
 									name="fields[<?php echo esc_attr( $field_key ); ?>][required]"
 									value="1"
 									<?php checked( ! empty( $field['required'] ) ); ?>
+									<?php disabled( empty( $field['visible'] ) ); ?>
 								/>
 							</td>
 							<td>

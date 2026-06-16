@@ -147,9 +147,12 @@ class BSE_Admin {
 		$fields     = array();
 
 		foreach ( $field_defs as $key => $default ) {
+			$visible  = isset( $_POST['fields'][ $key ]['visible'] );
+			$required = $visible && isset( $_POST['fields'][ $key ]['required'] );
+
 			$fields[ $key ] = array(
-				'visible'  => isset( $_POST['fields'][ $key ]['visible'] ),
-				'required' => isset( $_POST['fields'][ $key ]['required'] ),
+				'visible'  => $visible,
+				'required' => $required,
 				'label'    => sanitize_text_field( wp_unslash( $_POST['fields'][ $key ]['label'] ?? $default['label'] ) ),
 				'order'    => absint( $_POST['fields'][ $key ]['order'] ?? $default['order'] ),
 			);
