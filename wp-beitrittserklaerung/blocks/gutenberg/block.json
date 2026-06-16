@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "beitrittserklaerung/form",
+	"version": "1.0.0",
+	"title": "Beitrittserklärung",
+	"category": "widgets",
+	"icon": "forms",
+	"description": "Formular für Vereins-Beitrittserklärungen mit PDF-Versand.",
+	"keywords": [ "verein", "formular", "beitritt" ],
+	"textdomain": "beitrittserklaerung",
+	"supports": {
+		"html": false,
+		"className": true
+	},
+	"render": "file:./render.php"
+}

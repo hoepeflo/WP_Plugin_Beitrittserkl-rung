@@ -1,0 +1,8 @@
+{
+    "name": "beitrittserklaerung/wp-plugin",
+    "description": "WordPress-Plugin für Vereins-Beitrittserklärungen",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=8.1"
+    }
+}
