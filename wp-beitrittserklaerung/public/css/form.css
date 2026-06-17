@@ -1,0 +1,111 @@
+/**
+ * Minimales Formular-Styling – Theme-Styles für Inputs/Buttons werden bevorzugt.
+ */
+.bse-form-wrapper {
+	margin-block: 1.5rem;
+}
+
+.bse-cluster {
+	border: 0;
+	margin: 0 0 1.75rem;
+	padding: 0;
+}
+
+.bse-cluster__legend {
+	font-size: 1.15em;
+	font-weight: 600;
+	margin-bottom: 0.75rem;
+	padding: 0;
+}
+
+.bse-field {
+	margin-bottom: 1rem;
+}
+
+.bse-field label {
+	display: block;
+	margin-bottom: 0.35rem;
+}
+
+.bse-field input[type="text"],
+.bse-field input[type="email"],
+.bse-field input[type="tel"],
+.bse-field input[type="date"],
+.bse-field select {
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.bse-checkbox-label {
+	display: flex;
+	gap: 0.6rem;
+	align-items: flex-start;
+	cursor: pointer;
+}
+
+.bse-checkbox-label input[type="checkbox"] {
+	margin-top: 0.2rem;
+	flex-shrink: 0;
+}
+
+.bse-checkbox-text {
+	flex: 1;
+}
+
+.bse-required {
+	color: #b32d2e;
+}
+
+.bse-optional {
+	font-size: 0.9em;
+	font-weight: normal;
+	color: #646970;
+}
+
+.bse-field-error {
+	display: block;
+	color: #b32d2e;
+	font-size: 0.9em;
+	margin-top: 0.25rem;
+}
+
+.bse-field-error:not([hidden]) {
+	display: block;
+}
+
+.bse-form-messages {
+	padding: 0.75rem 1rem;
+	margin-bottom: 1rem;
+	border: 1px solid #b32d2e;
+	background: #fcf0f1;
+	color: #8a2424;
+}
+
+.bse-form-messages.bse-form-messages--success {
+	border-color: #00a32a;
+	background: #edfaef;
+	color: #1e4620;
+}
+
+.bse-honeypot {
+	position: absolute !important;
+	left: -9999px !important;
+	height: 0 !important;
+	width: 0 !important;
+	overflow: hidden !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+}
+
+.bse-thank-you {
+	padding: 1rem 0;
+}
+
+.bse-form-actions {
+	margin-top: 1rem;
+}
+
+.bse-field--turnstile {
+	margin-top: 1rem;
+}
